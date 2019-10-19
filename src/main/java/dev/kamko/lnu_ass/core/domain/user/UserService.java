@@ -1,9 +1,12 @@
 package dev.kamko.lnu_ass.core.domain.user;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import dev.kamko.lnu_ass.core.domain.user.command.UserAuthenticatedCommand;
+import dev.kamko.lnu_ass.core.domain.user.command.LoginUserCommand;
+import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
+import dev.kamko.lnu_ass.core.google.user.GoogleUserInfo;
 import dev.kamko.lnu_ass.core.google.user.GoogleUserService;
 import dev.kamko.lnu_ass.crypto.EncryptionService;
 import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
@@ -33,13 +36,28 @@ public class UserService {
         var googleInfo = googleUserService.getUserInfo(tokens.getAccessToken());
         log.trace("registerUser(email={})", googleInfo.getEmail());
 
-        return userRepo.save(
-                new UserAuthenticatedCommand(
-                        googleInfo.getName(),
-                        googleInfo.getEmail(),
-                        encryptionService.encryptString(tokens.getRefreshToken())),
-                saveOptionsWithId(googleInfo.getSub())
-        );
+        var agg = userRepo.find(googleInfo.getSub());
+
+        if (agg == null) {
+            return registerUser(googleInfo, tokens);
+        } else {
+            return loginUser(googleInfo);
+        }
+    }
+
+    private CompletableFuture<EntityWithIdAndVersion<User>>
+    registerUser(GoogleUserInfo googleInfo, GoogleTokens tokens) {
+        var cmd = new RegisterUserCommand(
+                googleInfo.getName(),
+                googleInfo.getEmail(),
+                LocalDateTime.now(),
+                encryptionService.encryptString(tokens.getRefreshToken()));
+        return userRepo.save(cmd, saveOptionsWithId(googleInfo.getSub()));
+    }
+
+    private CompletableFuture<EntityWithIdAndVersion<User>>
+    loginUser(GoogleUserInfo googleInfo) {
+        return userRepo.update(googleInfo.getSub(), new LoginUserCommand(LocalDateTime.now()));
     }
 
     private Optional<SaveOptions> saveOptionsWithId(String id) {
