@@ -27,7 +27,6 @@ dependencies {
 
     implementation("io.eventuate.client.java:eventuate-client-java-spring:$eventuateClientVersion")
     implementation("io.eventuate.local.java:eventuate-local-java-jdbc:${eventuateLocalVersion}")
-    implementation("io.eventuate.local.java:eventuate-local-java-embedded-cdc-autoconfigure:${eventuateLocalVersion}")
 
     compileOnly('org.projectlombok:lombok:1.18.10')
     annotationProcessor('org.projectlombok:lombok:1.18.10')
