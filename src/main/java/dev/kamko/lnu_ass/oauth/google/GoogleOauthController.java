@@ -1,7 +1,6 @@
 package dev.kamko.lnu_ass.oauth.google;
 
 import java.io.IOException;
-import java.util.Map;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import dev.kamko.lnu_ass.config.Api;
