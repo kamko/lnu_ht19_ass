@@ -11,7 +11,9 @@ import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class User extends ReflectiveMutableCommandProcessingAggregate<User, UserCommand> {
@@ -30,12 +32,16 @@ public class User extends ReflectiveMutableCommandProcessingAggregate<User, User
     }
 
     public void apply(UserRegisteredEvent event) {
+        log.trace("apply(event={})", event);
+
         this.googleId = event.getGoogleId();
         this.name = event.getName();
         this.email = event.getEmail();
     }
 
     public void apply(UserRefreshTokenReceivedEvent event) {
+        log.trace("apply(event={})", event);
+
         this.encryptedRefreshToken = event.getEncryptedRefreshToken();
     }
 

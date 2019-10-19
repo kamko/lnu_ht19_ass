@@ -9,8 +9,10 @@ import dev.kamko.lnu_ass.crypto.EncryptionService;
 import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
 import io.eventuate.AggregateRepository;
 import io.eventuate.EntityWithIdAndVersion;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class UserService {
 
@@ -29,6 +31,7 @@ public class UserService {
     public CompletableFuture<EntityWithIdAndVersion<User>>
     registerUser(GoogleTokens tokens) {
         var googleInfo = googleUserService.getUserInfo(tokens.getAccessToken());
+        log.trace("registerUser(email={})", googleInfo.getEmail());
 
         return userRepo.save(
                 new RegisterUserCommand(
