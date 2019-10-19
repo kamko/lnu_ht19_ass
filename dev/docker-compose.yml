@@ -55,6 +55,7 @@ services:
     depends_on:
       - cdcservice
     environment:
+      SPRING_PROFILES_ACTIVE: jdbc-store
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/eventuate
       SPRING_DATASOURCE_USERNAME: eventuate
       SPRING_DATASOURCE_PASSWORD: eventuate
