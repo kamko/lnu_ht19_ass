@@ -9,7 +9,6 @@ import dev.kamko.lnu_ass.core.domain.user.command.LoginUserCommand;
 import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
 import dev.kamko.lnu_ass.core.google.user.GoogleUserInfo;
 import dev.kamko.lnu_ass.core.google.user.GoogleUserService;
-import dev.kamko.lnu_ass.crypto.EncryptionService;
 import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
 import io.eventuate.EntityNotFoundException;
 import io.eventuate.EntityWithIdAndVersion;
@@ -23,14 +22,11 @@ public class UserService {
 
     private final UserAggregateRepo userRepo;
     private final GoogleUserService googleUserService;
-    private final EncryptionService encryptionService;
 
     public UserService(UserAggregateRepo userRepo,
-                       GoogleUserService googleUserService,
-                       EncryptionService encryptionService) {
+                       GoogleUserService googleUserService) {
         this.userRepo = userRepo;
         this.googleUserService = googleUserService;
-        this.encryptionService = encryptionService;
     }
 
     public CompletableFuture<EntityWithIdAndVersion<User>>
