@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -14,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class GoogleApiConfiguration {
 
     @Bean
-    public NetHttpTransport netHttpTransport() {
+    public HttpTransport httpTransport() {
         return new NetHttpTransport();
     }
 
@@ -24,7 +26,7 @@ public class GoogleApiConfiguration {
     }
 
     @Bean
-    public AuthorizationCodeFlow googleAuthorizationCodeFlow(NetHttpTransport httpTransport,
+    public AuthorizationCodeFlow googleAuthorizationCodeFlow(HttpTransport httpTransport,
                                                              JsonFactory jsonFactory,
                                                              GoogleClientProperties props) {
         return new GoogleAuthorizationCodeFlow.Builder(
