@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRefreshTokenReceivedEvent implements UserEvent {
-    String encryptedRefreshToken;
+    String refreshToken;
 }

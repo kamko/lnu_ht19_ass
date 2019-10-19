@@ -57,7 +57,7 @@ public class UserService {
                 googleInfo.getName(),
                 googleInfo.getEmail(),
                 LocalDateTime.now(),
-                encryptionService.encryptString(tokens.getRefreshToken()));
+                tokens.getRefreshToken());
         return userRepo.save(cmd, saveOptionsWithId(googleInfo.getSub()));
     }
 

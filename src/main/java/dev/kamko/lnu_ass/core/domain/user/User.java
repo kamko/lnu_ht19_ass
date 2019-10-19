@@ -23,7 +23,7 @@ public class User extends ReflectiveMutableCommandProcessingAggregate<User, User
 
     private String name;
     private String email;
-    private String encryptedRefreshToken;
+    private String refreshToken;
     private LocalDateTime registeredAt;
     private LocalDateTime lastLoginAt;
 
@@ -54,7 +54,7 @@ public class User extends ReflectiveMutableCommandProcessingAggregate<User, User
     public void apply(UserRefreshTokenReceivedEvent event) {
         log.trace("apply(event={})", event);
 
-        this.encryptedRefreshToken = event.getEncryptedRefreshToken();
+        this.refreshToken = event.getRefreshToken();
     }
 
     public void apply(UserLoginEvent event) {
