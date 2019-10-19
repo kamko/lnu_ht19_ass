@@ -52,13 +52,13 @@ services:
   user-service:
     image: kamko/lnu_ht19_ass
     ports:
-      - "8081:8081"
+      - "8080:8080"
     depends_on:
       - cdcservice
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
       SPRING_DATASOURCE_USERNAME: mysqluser
       SPRING_DATASOURCE_PASSWORD: mysqlpw
-      EVENTUATELOCAL_AGGREGATESTORE_BOOTSTRAP_SERVER: kafka:9092
+      EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       GOOGLE_SECRET_CLIENT_ID: 507922976336-g215fpklv7ougkvhljbq7e7jkol3lkgn.apps.googleusercontent.com
       GOOGLE_SECRET_SECRET: -PHtPfIO7r8DacAxN_2L8qpg

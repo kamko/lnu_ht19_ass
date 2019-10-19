@@ -2,7 +2,7 @@ package dev.kamko.lnu_ass.core.domain.user;
 
 import java.util.List;
 
-import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
+import dev.kamko.lnu_ass.core.domain.user.command.UserAuthenticatedCommand;
 import dev.kamko.lnu_ass.core.domain.user.command.UserCommand;
 import dev.kamko.lnu_ass.core.domain.user.event.UserRefreshTokenReceivedEvent;
 import dev.kamko.lnu_ass.core.domain.user.event.UserRegisteredEvent;
@@ -17,15 +17,14 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class User extends ReflectiveMutableCommandProcessingAggregate<User, UserCommand> {
-    private String googleId;
     private String name;
     private String email;
     private String encryptedRefreshToken;
 
-    public List<Event> process(RegisterUserCommand cmd) {
+    public List<Event> process(UserAuthenticatedCommand cmd) {
         return EventUtil.events(
                 new UserRegisteredEvent(
-                        cmd.getName(), cmd.getEmail(), cmd.getSud()),
+                        cmd.getName(), cmd.getEmail()),
                 new UserRefreshTokenReceivedEvent(
                         cmd.getEncryptedRefreshToken())
         );
@@ -34,7 +33,6 @@ public class User extends ReflectiveMutableCommandProcessingAggregate<User, User
     public void apply(UserRegisteredEvent event) {
         log.trace("apply(event={})", event);
 
-        this.googleId = event.getGoogleId();
         this.name = event.getName();
         this.email = event.getEmail();
     }

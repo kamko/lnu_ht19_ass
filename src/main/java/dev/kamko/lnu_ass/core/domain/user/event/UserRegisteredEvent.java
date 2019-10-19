@@ -6,5 +6,4 @@ import lombok.Value;
 public class UserRegisteredEvent implements UserEvent {
     String name;
     String email;
-    String googleId;
 }

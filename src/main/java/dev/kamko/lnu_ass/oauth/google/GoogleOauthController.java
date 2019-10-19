@@ -41,7 +41,7 @@ public class GoogleOauthController {
     }
 
     @GetMapping("/callback")
-    public Map callback(String code) throws IOException {
+    public Object callback(String code) throws IOException {
 
         var tokenResponse = authCodeFlow.newTokenRequest(code)
                 .setRedirectUri(callbackUrl())
@@ -50,9 +50,7 @@ public class GoogleOauthController {
         var accessToken = tokenResponse.getAccessToken();
         var refreshToken = tokenResponse.getRefreshToken();
 
-        userService.registerUser(GoogleTokens.of(accessToken, refreshToken));
-
-        return Map.of("accessToken", accessToken);
+        return userService.handleUserAuthentication(GoogleTokens.of(accessToken, refreshToken));
     }
 
     @PostMapping("/verify-token")
