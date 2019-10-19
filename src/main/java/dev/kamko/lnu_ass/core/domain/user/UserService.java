@@ -3,6 +3,7 @@ package dev.kamko.lnu_ass.core.domain.user;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 
 import dev.kamko.lnu_ass.core.domain.user.command.LoginUserCommand;
 import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
@@ -10,6 +11,7 @@ import dev.kamko.lnu_ass.core.google.user.GoogleUserInfo;
 import dev.kamko.lnu_ass.core.google.user.GoogleUserService;
 import dev.kamko.lnu_ass.crypto.EncryptionService;
 import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
+import io.eventuate.EntityNotFoundException;
 import io.eventuate.EntityWithIdAndVersion;
 import io.eventuate.SaveOptions;
 import lombok.extern.slf4j.Slf4j;
@@ -34,14 +36,18 @@ public class UserService {
     public CompletableFuture<EntityWithIdAndVersion<User>>
     handleUserAuthentication(GoogleTokens tokens) {
         var googleInfo = googleUserService.getUserInfo(tokens.getAccessToken());
-        log.trace("registerUser(email={})", googleInfo.getEmail());
+        log.trace("handleUserAuthentication(sub={})", googleInfo.getSub());
 
-        var agg = userRepo.find(googleInfo.getSub());
-
-        if (agg == null) {
-            return registerUser(googleInfo, tokens);
-        } else {
+        try {
+            // TODO find better way
+            var agg = userRepo.find(googleInfo.getSub()).join();
             return loginUser(googleInfo);
+        } catch (CompletionException e) {
+            if (e.getCause() instanceof EntityNotFoundException) {
+                log.trace("New user found (id={}), registering.", googleInfo.getSub());
+                return registerUser(googleInfo, tokens);
+            }
+            throw e;
         }
     }
 

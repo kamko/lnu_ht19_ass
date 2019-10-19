@@ -1,4 +1,4 @@
-FROM adoptopenjdk:11.0.4_11-jre-hotspot
+FROM openjdk:13.0.1-slim-buster
 
 COPY build/libs/lnu_ass-*.jar app.jar
 

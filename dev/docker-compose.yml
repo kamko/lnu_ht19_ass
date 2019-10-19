@@ -28,13 +28,13 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   cdcservice:
-    image: eventuateio/eventuate-cdc-service:0.5.0.RELEASE
+    image: eventuateio/eventuate-cdc-service:0.4.0.RELEASE
     ports:
       - "8099:8080"
     depends_on:
-      - zookeeper
-      - kafka
       - mysql
+      - kafka
+      - zookeeper
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql/eventuate
       SPRING_DATASOURCE_USERNAME: mysqluser
@@ -44,13 +44,15 @@ services:
       EVENTUATELOCAL_ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
       EVENTUATELOCAL_CDC_DB_USER_NAME: root
       EVENTUATELOCAL_CDC_DB_PASSWORD: rootpassword
+      EVENTUATELOCAL_CDC_READ_OLD_DEBEZIUM_DB_OFFSET_STORAGE_TOPIC: "false"
       EVENTUATELOCAL_CDC_READER_NAME: MySqlReader
       EVENTUATELOCAL_CDC_OFFSET_STORE_KEY: MySqlBinlog
       EVENTUATELOCAL_CDC_MYSQL_BINLOG_CLIENT_UNIQUE_ID: 1234567890
-      EVENTUATELOCAL_CDC_READ_OLD_DEBEZIUM_DB_OFFSET_STORAGE_TOPIC: "true"
+      EVENTUATE_CDC_TYPE: EventuateLocal
 
   user-service:
-    image: kamko/lnu_ht19_ass
+    build:
+      ../
     ports:
       - "8080:8080"
     depends_on:
@@ -60,5 +62,5 @@ services:
       SPRING_DATASOURCE_USERNAME: mysqluser
       SPRING_DATASOURCE_PASSWORD: mysqlpw
       EVENTUATELOCAL_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-      GOOGLE_SECRET_CLIENT_ID: 507922976336-g215fpklv7ougkvhljbq7e7jkol3lkgn.apps.googleusercontent.com
-      GOOGLE_SECRET_SECRET: -PHtPfIO7r8DacAxN_2L8qpg
+      GOOGLE_SECRET_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_SECRET_SECRET: ${GOOGLE_SECRET}

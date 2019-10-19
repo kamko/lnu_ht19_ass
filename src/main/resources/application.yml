@@ -5,3 +5,9 @@ encryption:
 logging:
   level:
     dev.kamko: trace
+    io.eventuate.activity: debug
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
