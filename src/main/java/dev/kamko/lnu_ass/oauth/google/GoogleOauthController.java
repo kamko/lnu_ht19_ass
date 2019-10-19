@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import dev.kamko.lnu_ass.config.Api;
-import dev.kamko.lnu_ass.core.user.domain.UserService;
+import dev.kamko.lnu_ass.core.domain.user.UserService;
 import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

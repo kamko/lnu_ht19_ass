@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.core.user.domain.event;
+package dev.kamko.lnu_ass.core.domain.user.event;
 
 import lombok.Value;
 

@@ -1,10 +1,10 @@
-package dev.kamko.lnu_ass.core.user.domain;
+package dev.kamko.lnu_ass.core.domain.user;
 
 import java.util.concurrent.CompletableFuture;
 
-import dev.kamko.lnu_ass.core.user.domain.command.RegisterUserCommand;
-import dev.kamko.lnu_ass.core.user.domain.command.UserCommand;
-import dev.kamko.lnu_ass.core.user.google.GoogleUserService;
+import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
+import dev.kamko.lnu_ass.core.domain.user.command.UserCommand;
+import dev.kamko.lnu_ass.core.google.user.GoogleUserService;
 import dev.kamko.lnu_ass.crypto.EncryptionService;
 import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
 import io.eventuate.AggregateRepository;
@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private final AggregateRepository<User, UserCommand> userRepo;
+    private final UserAggregateRepo userRepo;
     private final GoogleUserService googleUserService;
     private final EncryptionService encryptionService;
 
-    public UserService(AggregateRepository<User, UserCommand> userRepo,
+    public UserService(UserAggregateRepo userRepo,
                        GoogleUserService googleUserService,
                        EncryptionService encryptionService) {
         this.userRepo = userRepo;

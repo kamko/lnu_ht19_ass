@@ -1,11 +1,11 @@
-package dev.kamko.lnu_ass.core.user.domain;
+package dev.kamko.lnu_ass.core.domain.user;
 
 import java.util.List;
 
-import dev.kamko.lnu_ass.core.user.domain.command.RegisterUserCommand;
-import dev.kamko.lnu_ass.core.user.domain.command.UserCommand;
-import dev.kamko.lnu_ass.core.user.domain.event.UserRefreshTokenReceivedEvent;
-import dev.kamko.lnu_ass.core.user.domain.event.UserRegisteredEvent;
+import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
+import dev.kamko.lnu_ass.core.domain.user.command.UserCommand;
+import dev.kamko.lnu_ass.core.domain.user.event.UserRefreshTokenReceivedEvent;
+import dev.kamko.lnu_ass.core.domain.user.event.UserRegisteredEvent;
 import io.eventuate.Event;
 import io.eventuate.EventUtil;
 import io.eventuate.ReflectiveMutableCommandProcessingAggregate;

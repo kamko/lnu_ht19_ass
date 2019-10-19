@@ -1,0 +1,4 @@
+google:
+  secret:
+    clientId: 123
+    secret: 456

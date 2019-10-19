@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.core.user.google;
+package dev.kamko.lnu_ass.core.google.user;
 
 import lombok.Value;
 
