@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Api.API_PREFIX + "/auth")
+@RequestMapping(Api.AUTH_PREFIX)
 public class AuthController {
 
     private final JwtTokenService jwtTokenService;
