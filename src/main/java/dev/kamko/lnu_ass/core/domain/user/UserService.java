@@ -55,9 +55,7 @@ public class UserService {
 
     private CompletableFuture<Map<String, Object>> addJwtToken(String email, CompletableFuture<?> future) {
         return future.thenApply(
-                ewiv -> Map.of(
-                        "jwtToken", jwtTokenService.generateToken(email),
-                        "entity", ewiv));
+                ewiv -> Map.of("jwtToken", jwtTokenService.generateToken(email)));
     }
 
     private CompletableFuture<EntityWithIdAndVersion<User>> registerUser(GoogleUserInfo googleInfo,
