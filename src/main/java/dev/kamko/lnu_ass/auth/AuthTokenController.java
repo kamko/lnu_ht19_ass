@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(Api.AUTH_PREFIX)
-public class AuthController {
+public class AuthTokenController {
 
     private final JwtTokenService jwtTokenService;
 
-    public AuthController(JwtTokenService jwtTokenService) {
+    public AuthTokenController(JwtTokenService jwtTokenService) {
         this.jwtTokenService = jwtTokenService;
     }
 
-    @GetMapping("/token/{token}/verification")
+    @GetMapping("/{token}")
     public Map<String, Object> verifyToken(@PathVariable("token") String token) {
         return Map.of(
                 "token", token,

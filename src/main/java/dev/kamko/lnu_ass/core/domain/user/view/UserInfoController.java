@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Api.API_PREFIX)
+@RequestMapping(Api.API_PREFIX + "/users")
 public class UserInfoController {
 
     private final UserInfoService userInfoService;
