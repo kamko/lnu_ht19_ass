@@ -1,4 +1,4 @@
-FROM openjdk:13.0.1-slim-buster
+FROM adoptopenjdk/openjdk13:jre-13_33-ubi-minimal
 
 COPY build/libs/lnu_ass-*.jar app.jar
 
