@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties(value = GoogleClientProperties.class)
 public class LnuAssApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LnuAssApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LnuAssApplication.class, args);
+    }
 
 }

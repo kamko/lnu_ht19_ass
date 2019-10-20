@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(Api.API_PREFIX + "/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final JwtTokenService jwtTokenService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    public AuthController(JwtTokenService jwtTokenService) {
+        this.jwtTokenService = jwtTokenService;
     }
 
     @GetMapping("/token/{token}/verification")
     public Map<String, Object> verifyToken(@PathVariable("token") String token) {
         return Map.of(
                 "token", token,
-                "valid", authService.isValidToken(token)
+                "valid", jwtTokenService.isValidToken(token)
         );
     }
 

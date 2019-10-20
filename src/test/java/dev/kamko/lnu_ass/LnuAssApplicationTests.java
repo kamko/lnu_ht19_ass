@@ -11,8 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 @Import(EmbeddedTestAggregateStoreConfiguration.class)
 class LnuAssApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

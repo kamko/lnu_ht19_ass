@@ -1,6 +1,5 @@
 package dev.kamko.lnu_ass.core.google.user;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;

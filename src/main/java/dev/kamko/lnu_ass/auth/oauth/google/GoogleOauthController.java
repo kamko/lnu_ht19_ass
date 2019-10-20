@@ -2,34 +2,33 @@ package dev.kamko.lnu_ass.auth.oauth.google;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import dev.kamko.lnu_ass.auth.AuthService;
-import dev.kamko.lnu_ass.config.Api;
-import dev.kamko.lnu_ass.core.domain.user.UserService;
+import dev.kamko.lnu_ass.auth.JwtTokenService;
 import dev.kamko.lnu_ass.auth.oauth.google.dto.GoogleTokens;
+import dev.kamko.lnu_ass.core.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static dev.kamko.lnu_ass.config.Api.AUTH_PREFIX;
+
 @RestController
-@RequestMapping(value = Api.API_PREFIX + "/auth/oauth2")
+@RequestMapping(value = AUTH_PREFIX + "/oauth2")
 public class GoogleOauthController {
 
     private final String baseUrl;
     private final AuthorizationCodeFlow authCodeFlow;
     private final UserService userService;
-    private final AuthService authService;
 
     public GoogleOauthController(@Value("${base-url}") String baseUrl,
                                  AuthorizationCodeFlow authCodeFlow,
-                                 UserService userService,
-                                 AuthService authService) {
+                                 UserService userService) {
         this.baseUrl = baseUrl;
         this.authCodeFlow = authCodeFlow;
         this.userService = userService;
-        this.authService = authService;
     }
 
     @GetMapping("/initiate")
@@ -39,13 +38,11 @@ public class GoogleOauthController {
                 .setRedirectUri(callbackUrl())
                 .build();
 
-        return Map.of(
-                "redirectTo", url
-        );
+        return Map.of("redirectTo", url);
     }
 
     @GetMapping("/callback")
-    public Object callback(String code) throws IOException {
+    public Future<?> callback(String code) throws IOException {
 
         var tokenResponse = authCodeFlow.newTokenRequest(code)
                 .setRedirectUri(callbackUrl())
@@ -54,15 +51,11 @@ public class GoogleOauthController {
         var accessToken = tokenResponse.getAccessToken();
         var refreshToken = tokenResponse.getRefreshToken();
 
-        return userService.handleUserAuthentication(GoogleTokens.of(accessToken, refreshToken))
-                .thenApply(ewiv -> Map.of(
-                        "jwtToken", authService.generateToken(ewiv.getAggregate().getEmail()),
-                        "entity", ewiv
-                ));
+        return userService.handleUserAuthentication(GoogleTokens.of(accessToken, refreshToken));
     }
 
     private String callbackUrl() {
-        return baseUrl + Api.API_PREFIX + "/auth/oauth2/callback";
+        return baseUrl + AUTH_PREFIX + "/oauth2/callback";
     }
 
 }

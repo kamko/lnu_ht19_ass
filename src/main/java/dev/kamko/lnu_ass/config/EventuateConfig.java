@@ -5,7 +5,6 @@ import io.eventuate.javaclient.commonimpl.JSonMapper;
 import io.eventuate.javaclient.spring.EnableEventHandlers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 @Configuration
 @EnableEventHandlers

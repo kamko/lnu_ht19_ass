@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthService {
+public class JwtTokenService {
 
     private static final String ISSUER = "lnu.kamko.dev";
 
     private final Algorithm algorithm;
 
-    public AuthService(@Value("${auth.jwt.secret}") String secret) {
+    public JwtTokenService(@Value("${auth.jwt.secret}") String secret) {
         this.algorithm = Algorithm.HMAC256(secret);
     }
 
