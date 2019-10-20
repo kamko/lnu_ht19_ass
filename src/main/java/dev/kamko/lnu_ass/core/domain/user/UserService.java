@@ -9,7 +9,7 @@ import dev.kamko.lnu_ass.core.domain.user.command.LoginUserCommand;
 import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;
 import dev.kamko.lnu_ass.core.google.user.GoogleUserInfo;
 import dev.kamko.lnu_ass.core.google.user.GoogleUserService;
-import dev.kamko.lnu_ass.oauth.google.dto.GoogleTokens;
+import dev.kamko.lnu_ass.auth.oauth.google.dto.GoogleTokens;
 import io.eventuate.EntityNotFoundException;
 import io.eventuate.EntityWithIdAndVersion;
 import io.eventuate.SaveOptions;

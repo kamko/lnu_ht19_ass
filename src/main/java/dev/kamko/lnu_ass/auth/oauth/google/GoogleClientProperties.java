@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.oauth.google;
+package dev.kamko.lnu_ass.auth.oauth.google;
 
 import lombok.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.oauth.google.dto;
+package dev.kamko.lnu_ass.auth.oauth.google.dto;
 
 import lombok.Value;
 
