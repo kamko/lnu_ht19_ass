@@ -33,6 +33,6 @@ public class UserInfoEventHandler {
     @EventHandlerMethod
     public void login(DispatchedEvent<UserLoginEvent> de) {
         log.trace("login(de={})", de);
-        userInfoService.updateLogin(de.getEntityId(), de.getEvent().getLoginTime());
+        userInfoService.markLogin(de.getEntityId(), de.getEvent().getLoginTime());
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class GoogleUserService {
 
-    private static final String USER_INFO_ENDPOINT = "https://www.googleapis.com/oauth2/v3/userinfo";
+    static final String USER_INFO_ENDPOINT = "https://www.googleapis.com/oauth2/v3/userinfo";
 
     private final RestTemplate rt;
 

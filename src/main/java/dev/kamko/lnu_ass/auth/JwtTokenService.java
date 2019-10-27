@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtTokenService {
 
-    private static final String ISSUER = "lnu.kamko.dev";
+    static final String ISSUER = "lnu.kamko.dev";
 
     private final Algorithm algorithm;
 
