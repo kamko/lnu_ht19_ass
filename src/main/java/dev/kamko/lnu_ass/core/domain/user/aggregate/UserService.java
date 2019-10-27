@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.core.domain.user;
+package dev.kamko.lnu_ass.core.domain.user.aggregate;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
-import dev.kamko.lnu_ass.auth.JwtTokenService;
+import dev.kamko.lnu_ass.auth.token.JwtTokenService;
 import dev.kamko.lnu_ass.auth.oauth.google.dto.GoogleTokens;
 import dev.kamko.lnu_ass.core.domain.user.command.LoginUserCommand;
 import dev.kamko.lnu_ass.core.domain.user.command.RegisterUserCommand;

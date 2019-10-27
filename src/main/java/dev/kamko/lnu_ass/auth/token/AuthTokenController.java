@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.auth;
+package dev.kamko.lnu_ass.auth.token;
 
 import java.util.Map;
 

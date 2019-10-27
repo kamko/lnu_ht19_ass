@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.auth;
+package dev.kamko.lnu_ass.auth.token;
 
 import java.sql.Date;
 import java.time.Instant;
@@ -29,7 +29,7 @@ public class JwtTokenService {
                 .sign(algorithm);
     }
 
-    boolean isValidToken(String token) {
+    public boolean isValidToken(String token) {
         try {
             JWT.require(algorithm)
                     .withIssuer(ISSUER)

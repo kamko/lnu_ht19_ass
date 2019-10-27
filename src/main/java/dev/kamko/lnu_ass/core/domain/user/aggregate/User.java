@@ -1,4 +1,4 @@
-package dev.kamko.lnu_ass.core.domain.user;
+package dev.kamko.lnu_ass.core.domain.user.aggregate;
 
 import java.time.LocalDateTime;
 import java.util.List;

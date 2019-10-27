@@ -1,14 +1,12 @@
-package dev.kamko.lnu_ass.auth;
+package dev.kamko.lnu_ass.auth.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import org.assertj.core.api.Assertions;
+import dev.kamko.lnu_ass.auth.token.JwtTokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class JwtTokenServiceTest {
 
