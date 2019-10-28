@@ -18,7 +18,7 @@ public class AuthTokenController {
         this.jwtTokenService = jwtTokenService;
     }
 
-    @GetMapping("/{token}")
+    @GetMapping("/token/{token}")
     public Map<String, Object> verifyToken(@PathVariable("token") String token) {
         return Map.of(
                 "token", token,
