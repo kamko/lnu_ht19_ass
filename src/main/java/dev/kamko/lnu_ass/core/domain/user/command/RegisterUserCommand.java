@@ -9,5 +9,5 @@ public class RegisterUserCommand implements UserCommand {
     String name;
     String email;
     LocalDateTime registrationTime;
-    String encryptedRefreshToken;
+    String refreshToken;
 }

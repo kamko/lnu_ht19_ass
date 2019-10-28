@@ -32,7 +32,7 @@ public class User extends ReflectiveMutableCommandProcessingAggregate<User, User
                 new UserRegisteredEvent(
                         cmd.getName(), cmd.getEmail(), cmd.getRegistrationTime()),
                 new UserRefreshTokenReceivedEvent(
-                        cmd.getEncryptedRefreshToken()),
+                        cmd.getRefreshToken()),
                 new UserLoginEvent(cmd.getRegistrationTime())
         );
     }

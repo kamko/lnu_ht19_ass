@@ -1,5 +1,6 @@
 package dev.kamko.lnu_ass.core.domain.user.aggregate;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
@@ -25,13 +26,16 @@ public class UserService {
     private final UserAggregateRepo userRepo;
     private final GoogleUserService googleUserService;
     private final JwtTokenService jwtTokenService;
+    private final Clock clock;
 
     public UserService(UserAggregateRepo userRepo,
                        GoogleUserService googleUserService,
-                       JwtTokenService jwtTokenService) {
+                       JwtTokenService jwtTokenService,
+                       Clock clock) {
         this.userRepo = userRepo;
         this.googleUserService = googleUserService;
         this.jwtTokenService = jwtTokenService;
+        this.clock = clock;
     }
 
     public CompletableFuture<Map<String, Object>>
@@ -63,13 +67,13 @@ public class UserService {
         var cmd = new RegisterUserCommand(
                 googleInfo.getName(),
                 googleInfo.getEmail(),
-                LocalDateTime.now(),
+                LocalDateTime.now(clock),
                 tokens.getRefreshToken());
         return userRepo.save(cmd, saveOptionsWithId(googleInfo.getSub()));
     }
 
     private CompletableFuture<EntityWithIdAndVersion<User>> loginUser(GoogleUserInfo googleInfo) {
-        return userRepo.update(googleInfo.getSub(), new LoginUserCommand(LocalDateTime.now()));
+        return userRepo.update(googleInfo.getSub(), new LoginUserCommand(LocalDateTime.now(clock)));
     }
 
     private Optional<SaveOptions> saveOptionsWithId(String id) {

@@ -2,7 +2,6 @@ package dev.kamko.lnu_ass.auth.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import dev.kamko.lnu_ass.auth.token.JwtTokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,6 @@ class JwtTokenServiceTest {
     private String secret = "ABCDEFG";
 
     private JwtTokenService sut;
-    private JWT jwt;
 
     @BeforeEach
     private void setUp() {

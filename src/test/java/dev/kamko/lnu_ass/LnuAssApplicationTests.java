@@ -8,7 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@Import(EmbeddedTestAggregateStoreConfiguration.class)
+@Import({
+        TestTemporalConfiguration.class,
+        EmbeddedTestAggregateStoreConfiguration.class})
 class LnuAssApplicationTests {
 
     @Test

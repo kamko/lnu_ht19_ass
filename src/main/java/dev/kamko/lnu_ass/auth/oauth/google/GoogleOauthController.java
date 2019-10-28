@@ -50,8 +50,6 @@ public class GoogleOauthController {
         var accessToken = tokenResponse.getAccessToken();
         var refreshToken = tokenResponse.getRefreshToken();
 
-        System.out.println(accessToken);
-
         return userService.handleUserAuthentication(GoogleTokens.of(accessToken, refreshToken));
     }
 
