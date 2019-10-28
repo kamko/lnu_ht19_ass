@@ -4,6 +4,7 @@
 
 ## Requirements
 - Java 13
+- Lombok support in IDE (not required but useful)
 - Gradle 6-RC1 (or use Gradle wrapper)
 - Eventuate Local environment
 
