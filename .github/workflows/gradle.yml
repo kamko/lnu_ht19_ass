@@ -19,7 +19,7 @@ jobs:
         run: ./gradlew build
 
       - name: Build image and publish
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: kamko/lnu_ht19_ass
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
